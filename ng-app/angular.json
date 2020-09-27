@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "garage-door-opener"
+    }
+  },
+  "defaultProject": "garage-door-opener",
+  "cli": {
+    "analytics": "3e0fcff8-fbf6-428b-81b6-7e3d37e3d0ad"
+  }
 }
