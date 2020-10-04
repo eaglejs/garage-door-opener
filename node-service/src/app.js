@@ -2,16 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const port = 8080;
-const originsWhitelist = [
-  'http://192.168.1.191',
-  'http://192.168.1.191:4200',
-  'http://app.portal.com',
-  'http://app.portal.com:4200'
-];
+const config = require('./config.json');
+
 const corsOptions = {
   origin: (origin, callback) => {
-    const isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+    const isWhitelisted = config.originsWhitelist.indexOf(origin) !== -1;
     callback(null, isWhitelisted);
   }
 };
@@ -62,6 +57,6 @@ APP.use((err, req, res, next) => {
 });
 
 // listen on port 3000
-APP.listen(port, function() {
-  console.log(`Express APP listening on port: ${port}`);
+APP.listen(config.port, function() {
+  console.log(`Express APP listening on port: ${config.port}`);
 });
