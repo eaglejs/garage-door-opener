@@ -12,12 +12,10 @@ const corsOptions = {
 };
 const APP = express();
 
-let db = null;
-
 // create mongodb connection
-mongoose.connect('mongodb://mongo:27017/garage-door-opener', { useNewUrlParser: true});
+mongoose.connect('mongodb://mongo:27017/portal', { useNewUrlParser: true});
 
-db = mongoose.connection;
+const db = mongoose.connection;
 
 //add cors whitelist
 APP.use(cors(corsOptions));
