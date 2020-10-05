@@ -4,6 +4,12 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config.json');
 
+const routes = [
+  require('./routes/login'),
+  require('./routes/register'),
+  require('./routes/toggle-garage-door')
+];
+
 const corsOptions = {
   origin: (origin, callback) => {
     const isWhitelisted = config.originsWhitelist.indexOf(origin) !== -1;
@@ -13,7 +19,7 @@ const corsOptions = {
 const APP = express();
 
 // create mongodb connection
-mongoose.connect('mongodb://mongo:27017/portal', { useNewUrlParser: true});
+mongoose.connect('mongodb://mongo:27017/garage-door-opener', { useNewUrlParser: true});
 
 const db = mongoose.connection;
 
@@ -32,10 +38,10 @@ if (APP.get('env') === 'production') {
   });
 }
 
-// // include routes
-// routes.forEach(route => {
-//   APP.use('/api', route);
-// });
+// include routes
+routes.forEach(route => {
+  APP.use('/api', route);
+});
 
 // catch 404 and forward to error handler
 APP.use((req, res, next) => {
